@@ -1,7 +1,12 @@
-import { Text, View, Image, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  ActivityIndicator
+} from 'react-native';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
 import AuthorRow from './AuthorRow';
 
 export default class Card extends Component {
@@ -41,11 +46,19 @@ export default class Card extends Component {
           linkText={linkText}
           onPressLinkText={onPressLinkText}
         />
-        <Image
-          style={styles.image}
-          source={image}
-          onLoad={this.handleLoad} 
-        />
+        <View style={styles.image}>
+          {loading && (
+            <ActivityIndicator
+              style={StyleSheet.absoluteFill}
+              size={'large'}
+            />
+          )}
+          <Image
+            style={styles.image}
+            source={image}
+            onLoad={this.handleLoad}
+          />
+        </View>
       </View>
     );
   }
