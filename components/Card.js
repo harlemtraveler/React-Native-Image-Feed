@@ -17,6 +17,14 @@ export default class Card extends Component {
     onPressLinkText: () => {},
   };
 
+  state = {
+    loading: true,
+  };
+
+  handleLoad = () => {
+    this.setState({ loading: false });
+  };
+
   render () {
     const {
       fullname,
@@ -24,6 +32,7 @@ export default class Card extends Component {
       linkText,
       onPressLinkText
     } = this.props;
+    const { loading } = this.state;
 
     return (
       <View>
@@ -32,7 +41,11 @@ export default class Card extends Component {
           linkText={linkText}
           onPressLinkText={onPressLinkText}
         />
-        <Image style={styles.image} source={image} />
+        <Image
+          style={styles.image}
+          source={image}
+          onLoad={this.handleLoad} 
+        />
       </View>
     );
   }
