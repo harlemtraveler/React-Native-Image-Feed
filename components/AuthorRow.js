@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import PropTypes from 'porp-types';
+import PropTypes from 'prop-types';
 
 import Avatar from './Avatar';
 import getAvatarColor from '../utils/getAvatarColor';
@@ -19,7 +19,12 @@ export default function AuthorRow({ fullname, linkText, onPressLinkText }) {
         numberOfLines={1}>
         {fullname}
       </Text>
-      {/* ... */}
+      {/* Ref: 1, 2 */}
+      {!!linkText && (
+        <TouchableOpacity onPress={onPressLinkText}>
+          <Text numberOfLines={1}>{linkText}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -42,3 +47,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 6,
   },
 });
+
+/*
+  Reference Notes
+  ---------------
+
+  Conditonal Statment:
+    1. Conditionals double negation with "!!" makes sure we're dealiing with a Boolean value
+
+    2. Since linkText is a string, the && expression would evaluate to a string type when linkText is the empty string '' – in React Native (unlike on the web), we’re not allowed to render string values outside of Text (even empty strings).
+*/
