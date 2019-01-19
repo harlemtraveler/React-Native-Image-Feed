@@ -19,7 +19,6 @@ export default function AuthorRow({ fullname, linkText, onPressLinkText }) {
         numberOfLines={1}>
         {fullname}
       </Text>
-      {/* Ref: 1, 2 */}
       {!!linkText && (
         <TouchableOpacity onPress={onPressLinkText}>
           <Text numberOfLines={1}>{linkText}</Text>
