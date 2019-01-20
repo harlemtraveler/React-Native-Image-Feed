@@ -29,6 +29,10 @@ export default class Card extends Component {
     this.setState({ loading: false });
   };
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.linkText !== nextProps.linkText
+  }
+
   render () {
     const {
       fullname,
