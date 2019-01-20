@@ -1,5 +1,4 @@
 import {
-  Text,
   View,
   Image,
   StyleSheet,
@@ -54,7 +53,7 @@ export default class Card extends Component {
             />
           )}
           <Image
-            style={styles.image}
+            style={StyleSheet.absoluteFill}
             source={image}
             onLoad={this.handleLoad}
           />
@@ -63,6 +62,7 @@ export default class Card extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   image: {
     aspectRatio: 1,
