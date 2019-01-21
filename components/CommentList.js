@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import PropType from 'prop-type';
+import PropTypes from 'prop-types';
 
 export default class CommentList extends Component {
   static propTypes = {

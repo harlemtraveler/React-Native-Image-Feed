@@ -12,15 +12,17 @@ export default function Comments({
   onClose,
   onSubmitComment,
 }) {
-  <SafeAreaView style={style}>
-    <NavigationBar
-      title="Comments"
-      leftText="Close"
-      onPressLeftText={onClose}
-    />
-    <CommentInput placeholder="Leave a comments" onSubmit={onSubmitComment} />
-    <CommentList items={comments} />
-  </SafeAreaView>
+  return (
+    <SafeAreaView style={style}>
+      <NavigationBar
+        title="Comments"
+        leftText="Close"
+        onPressLeftText={onClose}
+      />
+      <CommentInput placeholder="Leave a comments" onSubmit={onSubmitComment} />
+      <CommentList items={comments} />
+    </SafeAreaView>
+  );
 };
 
 Comments.propTypes = {
