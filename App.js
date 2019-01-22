@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Constants } from 'expo';
-import { View, Modal, Platform, StyleSheet } from 'react-native';
+import { View, Modal, Platform, StyleSheet, AsyncStorage } from 'react-native';
 
 import Feed from './screens/Feed';
 import Comments from './screens/Comments';
+
+const ASYNC_STORAGE_COMMENTS_KEY = 'ASYNC_STORAGE_COMMENTS_KEY';
 
 export default class App extends Component {
   state = {
@@ -11,6 +13,20 @@ export default class App extends Component {
     showModal: false,
     selectedItemId: null,
   };
+
+  async componentDidMount() {
+    try {
+      const commentsForItem = await AsyncStorage.getItem(
+        ASYNC_STORAGE_COMMENTS_KEY,
+      );
+
+      this.setState({
+        commentsForItem: commentsForItem ? JSON.parse(commentsForItem) : {},
+      });
+    } catch (e) {
+      console.log('Failed to load comments');
+    }
+  }
 
   onSubmitComment = text => {
     const { selectedItemId, commentsForItem } = this.state;
@@ -22,6 +38,12 @@ export default class App extends Component {
     };
 
     this.setState({ commentsForItem: updated });
+
+    try {
+      AsyncStorage.setItem(ASYNC_STORAGE_COMMENTS_KEY, JSON.stringify(updated));
+    } catch (e) {
+      console.log('Faled to save comment', text, 'for', selectedItemId);
+    }
   };
 
   openCommentScreen = id => {
